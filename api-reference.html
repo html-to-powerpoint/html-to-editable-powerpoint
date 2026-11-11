@@ -1,0 +1,114 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>API reference — HTML to Editable PowerPoint</title><meta name="description" content="API reference for HTML to Editable PowerPoint: request parameters, formats, examples and integration guidance.">
+<link rel="stylesheet" href="styles.css"><script src="site.js" defer></script>
+<meta property="og:title" content="API reference — HTML to Editable PowerPoint"><meta property="og:description" content="API reference for HTML to Editable PowerPoint: request parameters, formats, examples and integration guidance."><meta property="og:type" content="website">
+</head><body><a class="skip" href="#main">Skip to content</a><header><nav aria-label="Main navigation"><a class="brand" href="./">HTML to Editable PowerPoint</a><div class="nav-links"><a href="./">Example</a><a href="api-reference.html">API reference</a><a href="usage.html">Usage guide</a><a href="https://github.com/html-to-powerpoint/html-to-editable-powerpoint">GitHub</a></div></nav></header><main id="main"><h1>HTML to Editable PowerPoint API reference</h1>
+<p>Convert supplied HTML slides to PPTX, PDF, PNG or JPEG with one JSON request.</p>
+<p><strong>Endpoint:</strong> <code>POST https://html-to-editable-powerpoint.p.rapidapi.com/api/render</code></p>
+<p>Authenticate with your <code>X-RapidAPI-Key</code> and
+<code>X-RapidAPI-Host: html-to-editable-powerpoint.p.rapidapi.com</code>.
+Use <code>Content-Type: application/json</code>.</p>
+<h2>Request parameters</h2>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Reference table"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>slides</code></td>
+<td>array of strings, required</td>
+<td>One complete HTML document per slide. 1–20 for PPTX/PDF; exactly one for PNG/JPEG.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>string</td>
+<td><code>pptx</code>, <code>pdf</code>, <code>png</code> or <code>jpeg</code>; defaults to <code>pptx</code>.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td>string</td>
+<td>Output filename title.</td>
+</tr>
+<tr>
+<td><code>aspectRatio</code></td>
+<td>string</td>
+<td><code>16:9</code> or <code>4:3</code>; defaults to <code>16:9</code>.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Design on a 960 × 540 CSS-pixel canvas for 16:9 or 960 × 720 for 4:3.
+Keep all content within the canvas and total JSON below the 10 MB gateway limit.
+Prefer self-contained HTML, inline styles and image data URLs. Check external
+fonts and images with a representative request before integrating.</p>
+<h2 id="curl-example">cURL example</h2>
+<p>Subscribe to a plan on the <a href="https://rapidapi.com/zhouxinyu1001/api/html-to-editable-powerpoint">API listing</a>.
+Download the <a href="examples/request.json">report request</a>, or create <code>request.json</code> with this minimal payload and set <code>RAPIDAPI_KEY</code> to your own key:</p>
+<pre><code class="language-json">{&quot;slides&quot;:[&quot;&lt;html&gt;&lt;body&gt;&lt;h1&gt;Hello, PowerPoint&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;&quot;],&quot;type&quot;:&quot;pptx&quot;,&quot;title&quot;:&quot;Example&quot;,&quot;aspectRatio&quot;:&quot;16:9&quot;}
+</code></pre>
+<p>Run this in a shell that supports <code>$RAPIDAPI_KEY</code> environment variable expansion:</p>
+<pre><code class="language-sh">curl --fail-with-body --request POST \
+  --url 'https://html-to-editable-powerpoint.p.rapidapi.com/api/render' \
+  --header 'Content-Type: application/json' \
+  --header 'X-RapidAPI-Host: html-to-editable-powerpoint.p.rapidapi.com' \
+  --header &quot;X-RapidAPI-Key: $RAPIDAPI_KEY&quot; \
+  --data-binary @request.json \
+  --output example.pptx
+</code></pre>
+<p>The response is a <strong>binary file</strong>, not JSON or a download URL. Check the HTTP
+status before opening the saved file; <code>--fail-with-body</code> may save an error body.
+In PowerShell use <code>curl.exe</code> and <code>$env:RAPIDAPI_KEY</code> instead.</p>
+<p>For PDF, change <code>type</code> in the request to <code>pdf</code> and the output filename to
+<code>example.pdf</code>. For PNG or JPEG use a single slide.</p>
+<h2>Responses</h2>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Reference table"><table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>Binary PPTX, PDF, PNG or JPEG. Read <code>Content-Type</code> and <code>Content-Disposition</code>.</td>
+</tr>
+<tr>
+<td>400</td>
+<td>Invalid input, slide count, format or aspect ratio.</td>
+</tr>
+<tr>
+<td>401 / 403</td>
+<td>Authentication or plan access denied by the service or gateway.</td>
+</tr>
+<tr>
+<td>413</td>
+<td>Input size exceeds a limit.</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Rate, quota or concurrency limit. Honor <code>Retry-After</code> when supplied.</td>
+</tr>
+<tr>
+<td>500 / 504</td>
+<td>Conversion failed or timed out. Simplify or split the input.</td>
+</tr>
+</tbody>
+</table></div>
+<p>The gateway waits up to 180 seconds for the origin. Split large or complex
+requests into smaller batches. Each successful output slide uses one Slides unit; failed conversions
+use zero Slides units, but requests have a separate quota. A response whose
+headers have been sent may already be billed even if the download is interrupted.
+Retries are new conversions.</p>
+<p><code>X-PPTXRenderer-Slide-Count</code> reports successful output pages. Check
+<code>X-RateLimit-Slides-Remaining</code> for your subscription's remaining page allowance
+when supplied by RapidAPI; the output page count alone is not a quota balance.</p>
+<p>Supported elements remain editable where possible; complex effects may be
+rasterized. Test representative HTML before integrating.</p>
+<p>See the Endpoints tab on the <a href="https://rapidapi.com/zhouxinyu1001/api/html-to-editable-powerpoint">API listing</a>
+for interactive request examples, or read the <a href="usage.html">full usage guide</a>.</p>
+<p><a href="openapi.json">Download the OpenAPI specification</a>.</p>
+</main><footer><p>HTML to Editable PowerPoint · Examples & documentation</p><a href="https://rapidapi.com/zhouxinyu1001/api/html-to-editable-powerpoint">View API on RapidAPI</a></footer></body></html>

@@ -1,0 +1,45 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HTML to Editable PowerPoint — example &amp; documentation</title><meta name="description" content="Download a real editable PowerPoint example, inspect its HTML source, and learn how to export PPTX, PDF, PNG and JPEG through the API.">
+<link rel="stylesheet" href="styles.css"><script src="site.js" defer></script>
+<meta property="og:title" content="HTML to Editable PowerPoint — example &amp; documentation"><meta property="og:description" content="Download a real editable PowerPoint example, inspect its HTML source, and learn how to export PPTX, PDF, PNG and JPEG through the API."><meta property="og:type" content="website">
+</head><body><a class="skip" href="#main">Skip to content</a><header><nav aria-label="Main navigation"><a class="brand" href="./">HTML to Editable PowerPoint</a><div class="nav-links"><a href="./">Example</a><a href="api-reference.html">API reference</a><a href="usage.html">Usage guide</a><a href="https://github.com/html-to-powerpoint/html-to-editable-powerpoint">GitHub</a></div></nav></header><main id="main"><section class="intro"><h1>HTML to editable PowerPoint.</h1><p>Explore a complete report example, compare the source with the output, and download a presentation you can edit.</p><div class="actions"><a class="button primary" href="examples/monthly-report.pptx" download>Download the PowerPoint</a><a class="button" href="api-reference.html#curl-example">See the API request</a></div></section>
+<figure class="example"><img src="examples/monthly-report.png" width="960" height="540" alt="Generated monthly business review slide with illustrative revenue figures, a revenue table and instructions to edit the export"><figcaption>Actual PNG export of the HTML below. All report figures are illustrative.</figcaption></figure>
+<section><h2>Open it. Change it. Make it yours.</h2><p>The sample PPTX contains editable text, a native table and shapes. Open it in PowerPoint to change the heading, update a table value or recolor a shape.</p><p class="note">Supported elements remain editable where possible. Complex effects may be rasterized; test your own HTML before integrating.</p></section>
+<section id="downloads"><h2>One source, four outputs</h2><p>These files were generated from the same self-contained HTML slide using the active API.</p><div class="table-scroll" tabindex="0" role="region" aria-label="Sample downloads"><table><thead><tr><th>File</th><th>What to inspect</th><th>Download</th></tr></thead><tbody>
+<tr><td>PowerPoint</td><td>Editable text, table and shapes</td><td><a href="examples/monthly-report.pptx" download>Download PPTX</a></td></tr>
+<tr><td>PDF</td><td>Document layout and typography</td><td><a href="examples/monthly-report.pdf" download>Download PDF</a></td></tr>
+<tr><td>PNG</td><td>Lossless slide preview</td><td><a href="examples/monthly-report.png" download>Download PNG</a></td></tr>
+<tr><td>JPEG</td><td>Compressed slide preview</td><td><a href="examples/monthly-report.jpeg" download>Download JPEG</a></td></tr>
+<tr><td>HTML source</td><td>Complete slide layout and inline styles</td><td><a href="examples/monthly-report.html" download>Download HTML</a></td></tr>
+<tr><td>Request body</td><td>The exact JSON payload for a PPTX export</td><td><a href="examples/request.json" download>Download JSON</a></td></tr></tbody></table></div></section>
+<section><h2>Generate the same slide</h2><ol><li>Get a key and plan from the <a href="https://rapidapi.com/zhouxinyu1001/api/html-to-editable-powerpoint">RapidAPI listing</a>.</li><li>Download <a href="examples/request.json" download>request.json</a> and follow the <a href="api-reference.html#curl-example">cURL example</a>.</li><li>Save the binary response as a file and open it in PowerPoint.</li></ol><p>Set <code>type</code> to <code>pptx</code>, <code>pdf</code>, <code>png</code> or <code>jpeg</code>. Submit 1–20 slides for PPTX/PDF, or one slide for PNG/JPEG.</p>
+<details><summary>Read the sample HTML</summary><pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;title&gt;Monthly business review&lt;/title&gt;&lt;/head&gt;
+&lt;body style=&quot;margin:0;width:960px;height:540px;background:#f4f6fa;font-family:Arial;color:#14243a&quot;&gt;
+&lt;div style=&quot;position:absolute;left:0;top:0;width:960px;height:10px;background:#2563eb&quot;&gt;&lt;/div&gt;
+&lt;p style=&quot;position:absolute;left:48px;top:30px;margin:0;font-size:14px;font-weight:bold;color:#2563eb&quot;&gt;BUSINESS REPORT&lt;/p&gt;
+&lt;h1 style=&quot;position:absolute;left:48px;top:60px;margin:0;font-size:40px&quot;&gt;Monthly business review&lt;/h1&gt;
+&lt;p style=&quot;position:absolute;left:48px;top:116px;margin:0;font-size:17px;color:#53647a&quot;&gt;A sample HTML slide exported as editable PowerPoint.&lt;/p&gt;
+&lt;div style=&quot;position:absolute;left:48px;top:166px;width:270px;height:108px;background:#ffffff;border-radius:12px&quot;&gt;&lt;/div&gt;
+&lt;p style=&quot;position:absolute;left:68px;top:181px;margin:0;font-size:14px;color:#53647a&quot;&gt;REVENUE&lt;/p&gt;
+&lt;p style=&quot;position:absolute;left:68px;top:209px;margin:0;font-size:32px;font-weight:bold&quot;&gt;$128,400&lt;/p&gt;
+&lt;div style=&quot;position:absolute;left:344px;top:166px;width:270px;height:108px;background:#ffffff;border-radius:12px&quot;&gt;&lt;/div&gt;
+&lt;p style=&quot;position:absolute;left:364px;top:181px;margin:0;font-size:14px;color:#53647a&quot;&gt;ACTIVE CUSTOMERS&lt;/p&gt;
+&lt;p style=&quot;position:absolute;left:364px;top:209px;margin:0;font-size:32px;font-weight:bold&quot;&gt;2,460&lt;/p&gt;
+&lt;div style=&quot;position:absolute;left:640px;top:166px;width:272px;height:108px;background:#e5edff;border-radius:12px&quot;&gt;&lt;/div&gt;
+&lt;p style=&quot;position:absolute;left:660px;top:181px;margin:0;font-size:14px;color:#365487&quot;&gt;MONTHLY GROWTH&lt;/p&gt;
+&lt;p style=&quot;position:absolute;left:660px;top:209px;margin:0;font-size:32px;font-weight:bold;color:#2563eb&quot;&gt;+18.2%&lt;/p&gt;
+&lt;h2 style=&quot;position:absolute;left:48px;top:298px;margin:0;font-size:22px&quot;&gt;Revenue by product&lt;/h2&gt;
+&lt;table style=&quot;position:absolute;left:48px;top:340px;width:560px;border-collapse:collapse;font-size:17px;background:#ffffff&quot;&gt;
+&lt;tr&gt;&lt;th style=&quot;padding:10px;text-align:left;border:1px solid #dbe2ec;background:#e9eef7&quot;&gt;Product&lt;/th&gt;&lt;th style=&quot;padding:10px;text-align:right;border:1px solid #dbe2ec;background:#e9eef7&quot;&gt;Revenue&lt;/th&gt;&lt;th style=&quot;padding:10px;text-align:right;border:1px solid #dbe2ec;background:#e9eef7&quot;&gt;Growth&lt;/th&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style=&quot;padding:10px;border:1px solid #dbe2ec&quot;&gt;Core&lt;/td&gt;&lt;td style=&quot;padding:10px;text-align:right;border:1px solid #dbe2ec&quot;&gt;$86,200&lt;/td&gt;&lt;td style=&quot;padding:10px;text-align:right;border:1px solid #dbe2ec&quot;&gt;+16.4%&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style=&quot;padding:10px;border:1px solid #dbe2ec&quot;&gt;Teams&lt;/td&gt;&lt;td style=&quot;padding:10px;text-align:right;border:1px solid #dbe2ec&quot;&gt;$42,200&lt;/td&gt;&lt;td style=&quot;padding:10px;text-align:right;border:1px solid #dbe2ec&quot;&gt;+22.1%&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+&lt;h2 style=&quot;position:absolute;left:650px;top:304px;margin:0;font-size:20px;color:#2563eb&quot;&gt;Try editing the export&lt;/h2&gt;
+&lt;p style=&quot;position:absolute;left:650px;top:345px;width:254px;margin:0;font-size:18px;line-height:1.6&quot;&gt;Change a heading.&lt;br&gt;Update a table value.&lt;br&gt;Recolor a shape.&lt;/p&gt;
+&lt;p style=&quot;position:absolute;left:48px;top:505px;margin:0;font-size:12px;color:#62748b&quot;&gt;DEMO DATA · Illustrative figures only&lt;/p&gt;
+&lt;p style=&quot;position:absolute;left:815px;top:505px;margin:0;font-size:12px;color:#62748b&quot;&gt;HTML → PPTX&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></details></section></main><footer><p>HTML to Editable PowerPoint · Examples & documentation</p><a href="https://rapidapi.com/zhouxinyu1001/api/html-to-editable-powerpoint">View API on RapidAPI</a></footer></body></html>

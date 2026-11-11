@@ -1,0 +1,96 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Usage guide — HTML to Editable PowerPoint</title><meta name="description" content="Usage guide for HTML to Editable PowerPoint: request parameters, formats, examples and integration guidance.">
+<link rel="stylesheet" href="styles.css"><script src="site.js" defer></script>
+<meta property="og:title" content="Usage guide — HTML to Editable PowerPoint"><meta property="og:description" content="Usage guide for HTML to Editable PowerPoint: request parameters, formats, examples and integration guidance."><meta property="og:type" content="website">
+</head><body><a class="skip" href="#main">Skip to content</a><header><nav aria-label="Main navigation"><a class="brand" href="./">HTML to Editable PowerPoint</a><div class="nav-links"><a href="./">Example</a><a href="api-reference.html">API reference</a><a href="usage.html">Usage guide</a><a href="https://github.com/html-to-powerpoint/html-to-editable-powerpoint">GitHub</a></div></nav></header><main id="main"><h1>HTML to Editable PowerPoint</h1>
+<p>Convert HTML slides into editable PowerPoint presentations. Use the same API
+to export PDF documents and PNG or JPEG images.</p>
+<h2>Key features</h2>
+<ul>
+<li><strong>Editable PPTX:</strong> supported text, shapes, tables and charts become PowerPoint objects.</li>
+<li><strong>Four output formats:</strong> PPTX, PDF, PNG and JPEG from one endpoint.</li>
+<li><strong>Batch export:</strong> up to 20 slides per PPTX or PDF request.</li>
+<li><strong>Slide layouts:</strong> 16:9 widescreen and 4:3 standard.</li>
+</ul>
+<p>Use it for business reports, proposals and HTML layouts from AI presentation
+tools. Supply your HTML and CSS, then save the response as a file.</p>
+<h2>One endpoint, four output formats</h2>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Reference table"><table>
+<thead>
+<tr>
+<th>Output</th>
+<th>Use it for</th>
+<th>Slides per request</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PPTX</td>
+<td>Presentations with supported editable objects</td>
+<td>1–20</td>
+</tr>
+<tr>
+<td>PDF</td>
+<td>A presentation ready to read or share</td>
+<td>1–20</td>
+</tr>
+<tr>
+<td>PNG / JPEG</td>
+<td>Slide images for previews and thumbnails</td>
+<td>1</td>
+</tr>
+</tbody>
+</table></div>
+<p>Use <code>16:9</code> or <code>4:3</code> layouts. Submit JSON to <code>POST /api/render</code> and save the binary
+response as a file. Authentication and plan access are managed through RapidAPI.</p>
+<h2>What stays editable?</h2>
+<p>Supported text, shapes, tables and charts can become native PowerPoint objects.
+Complex visual effects may be rasterized, and support depends on the HTML/CSS
+used. Test a representative slide for typography, layout and editability before
+rolling out a large integration. This endpoint renders supplied HTML; it does not
+generate content or import existing PowerPoint files.</p>
+<h2>Quick start</h2>
+<p>Subscribe to a plan, then POST JSON to <code>/api/render</code> using the RapidAPI host and
+key shown in the Endpoints tab. Save the response as a binary file.</p>
+<pre><code class="language-json">{
+  &quot;slides&quot;: [&quot;\u003c!doctype html\u003e\u003chtml\u003e\u003chead\u003e\u003cmeta charset='utf-8'\u003e\u003c/head\u003e\u003cbody style='margin:0;width:960px;height:540px;background:#f5f7fb;font-family:Arial'\u003e\u003ch1 style='position:absolute;left:80px;top:120px;font-size:64px;color:#16324f'\u003eHello, PowerPoint\u003c/h1\u003e\u003c/body\u003e\u003c/html\u003e&quot;],
+  &quot;title&quot;: &quot;Example&quot;,
+  &quot;type&quot;: &quot;pptx&quot;,
+  &quot;aspectRatio&quot;: &quot;16:9&quot;
+}
+</code></pre>
+<p>Use <code>type: &quot;pdf&quot;</code>, <code>&quot;png&quot;</code> or <code>&quot;jpeg&quot;</code> for other exports. PNG and JPEG require
+exactly one slide. Supported aspect ratios are <code>16:9</code> and <code>4:3</code>.</p>
+<h2>Layout and assets</h2>
+<ul>
+<li>Use a 960 × 540 CSS-pixel canvas for <code>16:9</code>, or 960 × 720 for <code>4:3</code>.
+Position all content inside these bounds; oversized HTML is not auto-fit.</li>
+<li>Prefer self-contained HTML, inline CSS and data URLs for images.</li>
+<li>Check external fonts and images with a representative request before integrating.</li>
+<li>Use fonts available to the renderer or supported web fonts. Supply a sample
+deck to check typography and complex layouts before a large integration.</li>
+<li>The API exports HTML slides; it does not import or parse uploaded PPTX files.</li>
+</ul>
+<h2>Limits and billing</h2>
+<ul>
+<li>Submit at most 20 slides per request and keep total JSON below 10 MB.</li>
+<li>The gateway waits up to 180 seconds for the origin. Large or complex jobs may
+need smaller batches. The slide-count limit is not a completion-time guarantee.</li>
+<li>Each successfully rendered output slide consumes one Slides unit. Requests
+also have a separate hard cap. See Pricing for both limits and rate limits.</li>
+<li>Failed conversions consume zero Slides units. Validation errors may still
+count toward the Requests quota.</li>
+<li>Billing starts when output headers are sent. A broken download may already
+be billed. Retries are new conversions; idempotency and range resume are not
+supported. Do not retry a successful conversion automatically.</li>
+<li>Initial BASIC and PRO plans use hard limits with no slide overage billing.
+RapidAPI may separately display its platform bandwidth allowance and fee.</li>
+</ul>
+<h2>Errors and support</h2>
+<p>400 indicates invalid input; 413 indicates excessive input size. For 429, respect
+<code>Retry-After</code> when present and retry with backoff. For 500 or 504, simplify or
+split the input before retrying. Gateway errors may use RapidAPI's own format.</p>
+<p>For support, use the provider contact/discussion controls on this RapidAPI
+listing. Include the request time, any request ID, output type, slide count and a
+minimal non-sensitive reproduction. Never post API keys or confidential decks.</p>
+</main><footer><p>HTML to Editable PowerPoint · Examples & documentation</p><a href="https://rapidapi.com/zhouxinyu1001/api/html-to-editable-powerpoint">View API on RapidAPI</a></footer></body></html>
