@@ -12,6 +12,7 @@
 <tr><td>JPEG</td><td>Compressed slide preview</td><td><a href="examples/monthly-report.jpeg" download>Download JPEG</a></td></tr>
 <tr><td>HTML source</td><td>Complete slide layout and inline styles</td><td><a href="examples/monthly-report.html" download>Download HTML</a></td></tr>
 <tr><td>Request body</td><td>The exact JSON payload for a PPTX export</td><td><a href="examples/request.json" download>Download JSON</a></td></tr></tbody></table></div></section>
+<section><h2>ECharts as native PowerPoint charts</h2><p>Supported ECharts bar, line and pie charts retain editable chart data in PowerPoint. PowerPoint controls the chart layout, so some styling can differ. Unsupported chart types or effects may be exported as images.</p><p>HTML tables export as native PowerPoint tables with editable cells.</p></section>
 <section><h2>Generate the same slide</h2><ol><li>Get a key and plan from the <a href="https://rapidapi.com/zhouxinyu1001/api/html-to-editable-powerpoint">RapidAPI listing</a>.</li><li>Download <a href="examples/request.json" download>request.json</a> and follow the <a href="api-reference.html#curl-example">cURL example</a>.</li><li>Save the binary response as a file and open it in PowerPoint.</li></ol><p>Set <code>type</code> to <code>pptx</code>, <code>pdf</code>, <code>png</code> or <code>jpeg</code>. Submit 1–20 slides for PPTX/PDF, or one slide for PNG/JPEG.</p>
 <details><summary>Read the sample HTML</summary><pre><code>&lt;!doctype html&gt;
 &lt;html lang=&quot;en&quot;&gt;
