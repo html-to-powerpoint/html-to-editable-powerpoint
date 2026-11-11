@@ -1,0 +1,30 @@
+{
+  "generatedAt": "2026-11-11T12:57:40.047146+00:00",
+  "data": "Illustrative figures only",
+  "sourceSha256": "2755a977252786d8d52bd88ad67335fc0e8f5139932b2608062ce9fc9ae710e8",
+  "files": [
+    {
+      "file": "monthly-report.pptx",
+      "bytes": 25217,
+      "sha256": "1a379157d3f6590f2c28485105addc94f90b58e81ee179b12b8b387e97e28a3b",
+      "slides": 1,
+      "textRuns": 27,
+      "nativeTables": 1
+    },
+    {
+      "file": "monthly-report.pdf",
+      "bytes": 29702,
+      "sha256": "eb48ae816c1367692095b9f361e2b47f24b48452c9ec380ed9268cb53d871fd4"
+    },
+    {
+      "file": "monthly-report.png",
+      "bytes": 142221,
+      "sha256": "9376df3e2a4fefd8fe797b5d1bb628b457adb698b7f0732d9c51f874fdfa609f"
+    },
+    {
+      "file": "monthly-report.jpeg",
+      "bytes": 157160,
+      "sha256": "2b722471d2597472ccfd0570b4051f1f7ae5e88affd93c076c6e135693bd81ae"
+    }
+  ]
+}

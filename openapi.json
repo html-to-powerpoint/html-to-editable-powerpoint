@@ -1,0 +1,151 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "HTML to Editable PowerPoint",
+    "version": "1.0.0",
+    "description": "Convert HTML to editable PowerPoint (PPTX). Export PDF, PNG and JPEG from the same API. Up to 20 slides per request."
+  },
+  "servers": [
+    {
+      "url": "https://html-to-editable-powerpoint.p.rapidapi.com",
+      "description": "RapidAPI gateway; use your consumer key"
+    }
+  ],
+  "paths": {
+    "/api/render": {
+      "post": {
+        "operationId": "renderSlides",
+        "summary": "Render HTML slides",
+        "tags": [
+          "Rendering"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RenderRequest"
+              },
+              "example": {
+                "slides": [
+                  "<!doctype html><html><head><meta charset='utf-8'></head><body style='margin:0;width:960px;height:540px;background:#f5f7fb;font-family:Arial'><h1 style='position:absolute;left:80px;top:120px;font-size:64px;color:#16324f'>Hello, PowerPoint</h1></body></html>"
+                ],
+                "title": "Example",
+                "type": "pptx",
+                "aspectRatio": "16:9"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Binary file. Billing is recorded when response headers are sent; a broken download is not automatically refunded. Retrying is a new billable conversion. Range downloads and idempotency are not supported.",
+            "headers": {
+              "X-RapidAPI-Billing": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Provider-side usage, e.g. Slides=3; the gateway may consume this header"
+              },
+              "X-PPTXRenderer-Slide-Count": {
+                "schema": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "description": "Successful output slide count; source for the gateway Slides billing transformation"
+              }
+            },
+            "content": {
+              "application/vnd.openxmlformats-officedocument.presentationml.presentation": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/pdf": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "image/png": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "image/jpeg": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid JSON, HTML, slide count, format or aspect ratio; zero Slides units"
+          },
+          "401": {
+            "description": "Missing or invalid gateway authentication"
+          },
+          "413": {
+            "description": "Request exceeds the gateway or service input size limit"
+          },
+          "429": {
+            "description": "Rate, quota or service capacity reached; retry later when permitted"
+          },
+          "500": {
+            "description": "Conversion failed; zero Slides units"
+          },
+          "504": {
+            "description": "Conversion processing deadline exceeded; zero Slides units"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "RenderRequest": {
+        "type": "object",
+        "required": [
+          "slides"
+        ],
+        "properties": {
+          "slides": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 20,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "description": "One complete HTML document per slide. Use 960x540 CSS pixels for 16:9 or 960x720 for 4:3; oversized HTML is not auto-fit. Submit at most 20 slides and keep total JSON below the 10 MB gateway limit."
+          },
+          "title": {
+            "type": "string",
+            "description": "Output filename title"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "pptx",
+              "pdf",
+              "png",
+              "jpeg"
+            ],
+            "default": "pptx"
+          },
+          "aspectRatio": {
+            "type": "string",
+            "enum": [
+              "16:9",
+              "4:3"
+            ],
+            "default": "16:9"
+          }
+        }
+      }
+    }
+  }
+}

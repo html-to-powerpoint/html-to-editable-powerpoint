@@ -1,0 +1,5 @@
+.env
+.env.*
+Output/
+__pycache__/
+.impeccable/
