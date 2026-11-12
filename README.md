@@ -1,6 +1,6 @@
 # HTML to Editable PowerPoint — examples and documentation
 
-Static HTML showcase for the [API on RapidAPI](https://rapidapi.com/zhouxinyu1001/api/html-to-editable-powerpoint).
+Static HTML showcase for the [API on RapidAPI](https://rapidapi.com/AguillardPortlock/api/html-to-editable-powerpoint).
 
 - `index.html`: a real report example and downloadable exports.
 - `api-reference.html`: request parameters and a cURL example.
